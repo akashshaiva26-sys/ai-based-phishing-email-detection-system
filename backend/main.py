@@ -116,10 +116,12 @@ async def analyze_image_email(
     content = await file.read()
     mime_type = file.content_type or "image/png"
 
+    active_gemini_key = (gemini_api_key or "").strip() or os.getenv("GEMINI_API_KEY", "")
+
     screenshot_result = screenshot_analyzer.process_screenshot(
         image_bytes=content,
         client_ocr_text=client_ocr_text,
-        gemini_api_key=gemini_api_key,
+        gemini_api_key=active_gemini_key,
         mime_type=mime_type
     )
 
@@ -160,10 +162,12 @@ def analyze_image_base64(request: ScreenshotBase64Request):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid base64 image data: {str(e)}")
 
+    active_gemini_key = (request.gemini_api_key or "").strip() or os.getenv("GEMINI_API_KEY", "")
+
     screenshot_result = screenshot_analyzer.process_screenshot(
         image_bytes=image_bytes,
         client_ocr_text=request.client_ocr_text,
-        gemini_api_key=request.gemini_api_key,
+        gemini_api_key=active_gemini_key,
         mime_type=request.mime_type or "image/png"
     )
 
