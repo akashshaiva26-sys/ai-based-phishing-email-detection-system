@@ -1,4 +1,5 @@
 {
+  "framework": null,
   "outputDirectory": "frontend",
   "cleanUrls": true
 }
