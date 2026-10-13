@@ -1,6 +1,7 @@
 {
-  "framework": null,
+  "buildCommand": "",
   "outputDirectory": "frontend",
   "cleanUrls": true
 }
+
 
